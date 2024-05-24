@@ -4,3 +4,8 @@ export const getAllEmployees = () => {
 
 
 }
+
+export const getEmployeeByUserId = (userId) => {
+    return fetch (`http://localhost:8088/employees?userId=${userId}&_expand=user`).then((res) => res.json())
+
+}

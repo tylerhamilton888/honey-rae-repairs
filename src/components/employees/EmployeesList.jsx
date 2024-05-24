@@ -3,6 +3,7 @@ import { getStaffUsers} from "../../services/staffService.jsx";
 import { useState, useEffect } from "react";
 import { User } from "../../users/User.jsx";
 import "./Employees.css"
+import { Link } from "react-router-dom";
 
 export const EmployeesList = () => {
     const [employees, setEmployees] = useState([])
@@ -18,9 +19,12 @@ export const EmployeesList = () => {
         
         <div className="employees">
         {employees.map(employeeObject => {
-            return  <User user={employeeObject} />
+            return( 
+            <Link to={`/employees/${employeeObject.id}`}> 
+            <User user={employeeObject} />
+            </Link>
 
-            
+        )
         })}
     </div>
     )
