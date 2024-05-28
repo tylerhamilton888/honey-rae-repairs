@@ -32,6 +32,5 @@ const [employee, setEmployee] = useState ({})
             {employee.rate}
         </div>
 
-
     </section>
 }
