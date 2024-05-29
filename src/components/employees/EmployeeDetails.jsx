@@ -5,13 +5,14 @@ import "./Employees.css"
 
 export const EmployeeDetails = () => {
 const [employee, setEmployee] = useState ({})
-
-    const {employeeId} = useParams()
+ const {employeeId} = useParams()
 
     useEffect (() => {
         getEmployeeByUserId(employeeId).then(data => {
-            const employeeObject = data[0]
-            setEmployee(employeeObject)
+            const singleEmployee = data[0]
+            if (singleEmployee) {
+            setEmployee(singleEmployee)
+            }
         })
 
 
@@ -31,6 +32,9 @@ const [employee, setEmployee] = useState ({})
             <span className="employee-info">Rate :</span>
             {employee.rate}
         </div>
+        <footer className="employee-footer">
+            Currently working on {employee.employeeTickets?.length} tickets
+        </footer>
 
     </section>
 }
