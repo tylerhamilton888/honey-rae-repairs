@@ -7,6 +7,7 @@ import { EmployeeDetails } from "../components/employees/EmployeeDetails.jsx"
 import { CustomersList } from "../components/customers/CustomersList.jsx"
 import { CustomerDetails } from "../components/customers/CustomerDetails.jsx"
 import { useEffect, useState } from "react"
+import { EmployeeForm } from "../components/forms/EmployeeForm.jsx"
 
 
 export const ApplicationViews = () => {
@@ -41,8 +42,10 @@ export const ApplicationViews = () => {
  <Route path="customers">
     <Route index element ={<CustomersList/>} />
     <Route path =":customerId" element={<CustomerDetails/>} />
+
+   
     </Route>
- 
+    <Route path="profile" element={<EmployeeForm currentUser={currentUser}/>} /> 
 </Route>
 
 </Routes>
