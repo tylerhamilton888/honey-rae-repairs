@@ -1,5 +1,5 @@
 import { Route, Outlet, Routes } from "react-router-dom"
-import { NavBar } from "../components/nav/NavBar.jsx"
+import { NavBar } from "../components/nav/EmployeeNav.jsx"
 import { Welcome } from "../components/welcome/Welcome.jsx"
 import { TicketList } from "../components/tickets/TicketList.jsx"
 import { EmployeesList } from "../components/employees/EmployeesList.jsx"
@@ -8,6 +8,8 @@ import { CustomersList } from "../components/customers/CustomersList.jsx"
 import { CustomerDetails } from "../components/customers/CustomerDetails.jsx"
 import { useEffect, useState } from "react"
 import { EmployeeForm } from "../components/forms/EmployeeForm.jsx"
+import { EmployeeViews } from "./EmployeeViews.jsx"
+import { CustomerViews } from "./CustomerViews.jsx"
 
 
 export const ApplicationViews = () => {
@@ -22,32 +24,9 @@ export const ApplicationViews = () => {
   }, [])
   
   
-  return  <Routes>
-  <Route path="/" element={
-    <>
-<NavBar />
-
-<Outlet/>
-</>
-}
->
- <Route index element={<Welcome/>} />
- <Route path="tickets" element={<TicketList currentUser={currentUser}/>} />
- <Route path="employees">
-    <Route index element={<EmployeesList/>} />
-    <Route path =":employeeId" element={<EmployeeDetails/>} />
-    </Route>
-
-
- <Route path="customers">
-    <Route index element ={<CustomersList/>} />
-    <Route path =":customerId" element={<CustomerDetails/>} />
-
-   
-    </Route>
-    <Route path="profile" element={<EmployeeForm currentUser={currentUser}/>} /> 
-</Route>
-
-</Routes>
-
+  return currentUser.isStaff ? (
+  <EmployeeViews currentUser={currentUser}/>
+ ): (
+   <CustomerViews/>
+  ) 
 }
