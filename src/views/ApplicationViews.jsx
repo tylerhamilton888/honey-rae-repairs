@@ -1,5 +1,5 @@
 import { Route, Outlet, Routes } from "react-router-dom"
-import { NavBar } from "../components/nav/EmployeeNav.jsx"
+import { EmployeeNav } from "../components/nav/EmployeeNav.jsx"
 import { Welcome } from "../components/welcome/Welcome.jsx"
 import { TicketList } from "../components/tickets/TicketList.jsx"
 import { EmployeesList } from "../components/employees/EmployeesList.jsx"
@@ -27,6 +27,6 @@ export const ApplicationViews = () => {
   return currentUser.isStaff ? (
   <EmployeeViews currentUser={currentUser}/>
  ): (
-   <CustomerViews/>
+   <CustomerViews currentUser={currentUser}/>
   ) 
 }

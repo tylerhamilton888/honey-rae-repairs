@@ -5,7 +5,7 @@ import { Ticket } from "./Ticket.jsx"
 import { TicketFilterBar } from "../TicketFilterBar.jsx"
 
 
-export const TicketList = ({currentUser}) => {
+export const TicketList = ({ currentUser }) => {
   
     const [allTickets, setAllTickets] = useState([])
     const [showEmergencyOnly, setShowEmergencyOnly] = useState(false)
@@ -14,7 +14,18 @@ export const TicketList = ({currentUser}) => {
 
    const getAndSetTickets = () => {
     getAllTickets().then((ticketsArray) => {
+      console.log("Current user:", currentUser); // Log current user
+    console.log("Fetched tickets:", ticketsArray); // Log fetched tickets
+      if (currentUser.isStaff) {
       setAllTickets(ticketsArray)
+      } else {
+        const customerTickets = ticketsArray.filter(
+          (ticket) => ticket.userId === currentUser.id
+      )
+      
+      console.log("Filtered tickets for customer:", customerTickets); // Log filtered tickets for non-staff
+      setAllTickets(customerTickets)
+      }
       
     }  )
    }
@@ -24,7 +35,7 @@ export const TicketList = ({currentUser}) => {
   
     useEffect(()=>{
     getAndSetTickets()
-  }, [])
+  }, [currentUser])
   
     useEffect(()=> {
      if (showEmergencyOnly) {
